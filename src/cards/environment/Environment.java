@@ -2,6 +2,7 @@ package cards.environment;
 
 import cards.Card;
 import fileio.CardInput;
+import player.Player;
 
 import java.util.List;
 
@@ -12,7 +13,10 @@ public abstract class Environment extends Card {
         super(card);
     }
 
-    public boolean canAttack(int indexPlayer, int indexRow) {
-        return indexPlayer == 1 && indexRow > 2 || indexPlayer == 2 && indexRow < 3;
+    public boolean isEnemyRow(int indexPlayer, int indexRow) {
+        return indexPlayer == 1 && indexRow < 3 || indexPlayer == 2 && indexRow > 2;
     }
+
+    // TODO if ability == true remove from hand
+    public abstract boolean ability(Player player, int row);
 }

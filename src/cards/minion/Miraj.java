@@ -18,6 +18,8 @@ public class Miraj extends Minion implements SpecialAbility{
             int temp = this.getHealth();
             this.setHealth(card.getHealth());
             card.setHealth(temp);
+
+            setHasAttacked(true);
         }
     }
 }

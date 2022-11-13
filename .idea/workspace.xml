@@ -4,36 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GwentStone.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/Card.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/environment/Environment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/environment/Firestorm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/environment/HeartHound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/environment/SpecialAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/environment/Winterfell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/minion/Disciple.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/minion/Minion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/minion/Miraj.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/minion/SpecialAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/minion/TheRipper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/deck/Decks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/games/Actions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/games/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/games/StartGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/player/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/table/Hand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/table/Table.java" afterDir="false" />
+    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="add cards class">
+      <change afterPath="$PROJECT_DIR$/src/cards/hero/EmpressThorina.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/hero/GeneralKocioraw.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/hero/Hero.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/hero/KingMudface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/hero/LordRoyce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environment/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Environment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environment/Firestorm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Firestorm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environment/HeartHound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/HeartHound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environment/SpecialAbility.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environment/Winterfell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Winterfell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minion/Disciple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Disciple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minion/Miraj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Miraj.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minion/TheRipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/TheRipper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/player/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,20 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Iulia/IdeaProjects/GwentStoneoldv3",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Iulia/IdeaProjects/GwentStoneoldv3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -92,8 +79,17 @@
       <workItem from="1668096040052" duration="367000" />
       <workItem from="1668112057563" duration="4466000" />
       <workItem from="1668117023388" duration="4231000" />
-      <workItem from="1668158717697" duration="10791000" />
+      <workItem from="1668158717697" duration="11309000" />
+      <workItem from="1668273230372" duration="4983000" />
     </task>
+    <task id="LOCAL-00001" summary="add cards class">
+      <created>1668169639405</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668169639405</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,5 +105,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add cards class" />
+    <option name="LAST_COMMIT_MESSAGE" value="add cards class" />
   </component>
 </project>

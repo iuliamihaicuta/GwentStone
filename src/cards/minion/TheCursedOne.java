@@ -17,6 +17,8 @@ public class TheCursedOne extends Minion implements SpecialAbility{
             int temp = card.getHealth();
             card.setHealth(card.getAttackDamage());
             card.setAttackDamage(temp);
+
+            setHasAttacked(true);
         }
     }
 }

@@ -15,6 +15,8 @@ public class Player {
     private static int gamesPlayed = 0;
     private int totalGamesWon = 0;
 
+    private int id;
+
     private ArrayList<Card> usedDeck;
 
     public Player(DecksInput decks) {
@@ -67,6 +69,14 @@ public class Player {
 
     public void setUsedDeck(ArrayList<Card> usedDeck) {
         this.usedDeck = usedDeck;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void shuffleDeck(int deckIndex, int shuffleSeed) {

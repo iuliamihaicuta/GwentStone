@@ -15,6 +15,8 @@ public class TheRipper extends Minion implements SpecialAbility{
         if (canUseAbility(indexPlayer, cardCoordinates)) {
             Minion card = getTable().get(cardCoordinates.getX()).get(cardCoordinates.getY());
             card.setHealth(card.getHealth() - 2);
+
+            setHasAttacked(true);
         }
     }
 }
