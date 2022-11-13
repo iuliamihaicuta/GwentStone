@@ -3,6 +3,7 @@ package player;
 import cards.Card;
 import deck.Decks;
 import fileio.DecksInput;
+import table.Hand;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,10 +15,9 @@ public class Player {
     private int mana;
     private static int gamesPlayed = 0;
     private int totalGamesWon = 0;
-
     private int id;
-
     private ArrayList<Card> usedDeck;
+    private Hand hand;
 
     public Player(DecksInput decks) {
         this.decks = new Decks(decks);
@@ -87,4 +87,13 @@ public class Player {
 
         Collections.shuffle(usedDeck, new Random(shuffleSeed));
     }
+
+    private void addMana(int round) {
+
+    }
+
+    public void startTurn(int round) {
+
+    }
+
 }

@@ -4,23 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="add cards class">
-      <change afterPath="$PROJECT_DIR$/src/cards/hero/EmpressThorina.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/hero/GeneralKocioraw.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/hero/Hero.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/hero/KingMudface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/hero/LordRoyce.java" afterDir="false" />
+    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="update cards">
+      <change afterPath="$PROJECT_DIR$/src/games/CardActions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/games/PlayerActions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environment/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Environment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environment/Firestorm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Firestorm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environment/HeartHound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/HeartHound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environment/SpecialAbility.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environment/Winterfell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Winterfell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/Disciple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Disciple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/Miraj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Miraj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/TheRipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/TheRipper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/games/Actions.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/table/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/Hand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +70,7 @@
       <workItem from="1668112057563" duration="4466000" />
       <workItem from="1668117023388" duration="4231000" />
       <workItem from="1668158717697" duration="11309000" />
-      <workItem from="1668273230372" duration="4983000" />
+      <workItem from="1668273230372" duration="8684000" />
     </task>
     <task id="LOCAL-00001" summary="add cards class">
       <created>1668169639405</created>
@@ -89,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668169639405</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update cards">
+      <created>1668330820635</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668330820635</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +105,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add cards class" />
-    <option name="LAST_COMMIT_MESSAGE" value="add cards class" />
+    <MESSAGE value="update cards" />
+    <option name="LAST_COMMIT_MESSAGE" value="update cards" />
   </component>
 </project>
