@@ -1,16 +1,38 @@
 package cards.hero;
 
 import cards.Card;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CardInput;
+import player.Player;
 
-public abstract class Hero extends Card {
+public class Hero extends Card {
+    @JsonIgnore
     private boolean hasAttacked = false;
+    @JsonIgnore
+    private int attackDamage;
     public Hero(CardInput cardInput) {
         super(cardInput);
         setHealth(30);
     }
 
-    public abstract void ability(int indexPlayer, int row);
+    public Hero(Card card) {
+        super(card);
+        setHealth(30);
+    }
+
+//    public  void ability(int indexPlayer, int row);
+
+    public String canAttack(Player player) {
+        String error = null;
+
+        if (player.getMana() < getMana()) {
+            error = "Not enough mana to use hero's ability.";
+        } else if (hasAttacked) {
+            error = "Hero has already attacked this turn.";
+        }
+
+        return error;
+    }
 
     protected boolean isEnemyRow(int indexPlayer, int indexRow) {
         return indexPlayer == 1 && indexRow < 3 || indexPlayer == 2 && indexRow > 2;

@@ -7,8 +7,12 @@ import java.util.ArrayList;
 public class Hand {
     private ArrayList<Card> hand;
 
-    public static void removeFromHand(int cardIndex) {
+    public Hand() {
+        hand = new ArrayList<Card>();
+    }
 
+    public void removeFromHand(int cardIndex) {
+        hand.remove(cardIndex);
     }
 
     public ArrayList<Card> getHand() {

@@ -1,8 +1,10 @@
 package cards.minion;
 
 import cards.Card;
-import fileio.CardInput;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fileio.Coordinates;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,99 +13,116 @@ import static table.Table.enemyTankCards;
 
 public class Minion extends Card {
 
-    private final boolean isTank;
-    private boolean isFrozen = false;
-    private final boolean isOnTheFrontRow;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private final boolean tank;
+    @JsonIgnore
+    private boolean frozen = false;
+    @JsonIgnore
+    private final boolean onTheFrontRow;
+    @JsonIgnore
     private boolean hasAttacked = false;
 
-    private static final List<String> simpleMinionCardList =
+    public static final List<String> simpleMinionCardList =
             List.of("Sentinel", "Berserker", "Goliath", "Warden");
-    private static final List<String> abilityMinionCardList =
+    public static final List<String> abilityMinionCardList =
             List.of("The ripper", "Miraj", "The Cursed One", "Disciple");
-    private static final List<String> useAbilityOnEnemyCardList =
+    public static final List<String> useAbilityOnEnemyCardList =
             List.of("The ripper", "Miraj", "The Cursed One");
 
-    public Minion(CardInput card) {
+    public Minion(Card card) {
         super(card);
-        isTank = getName().equals("Goliath") || getName().equals("Warden");
-        isOnTheFrontRow = getName().equals("The Ripper") || getName().equals("Miraj")
+        tank = getName().equals("Goliath") || getName().equals("Warden");
+        onTheFrontRow = getName().equals("The Ripper") || getName().equals("Miraj")
                 || getName().equals("Goliath") || getName().equals("Warden");
     }
 
-    private boolean checkAttack(int indexPlayer, Coordinates cardCoordinates) {
-        boolean check = true;
+    public Minion(Minion card) {
+        super((Card) card);
+        this.tank = card.tank;
+        this.frozen = card.frozen;
+        this.onTheFrontRow = card.onTheFrontRow;
+        this.hasAttacked = card.hasAttacked;
+    }
 
-        if (isFrozen) {
-            System.out.println("Attacker card is frozen.");
-            check = false;
+    private String checkAttack() {
+        String error = null;
+
+        if (frozen) {
+            error = "Attacker card is frozen.";
         }
         else if (hasAttacked) {
-            System.out.println("Attacker card has already attacked this turn.");
-            check = false;
+            error = "Attacker card has already attacked this turn.";
         }
 
-        return check;
+        return error;
     }
 
     // TODO protected
-    public boolean canUseAbility(int indexPlayer, Coordinates cardCoordinates) {
-        boolean canUseAbility = checkAttack(indexPlayer, cardCoordinates);
-        int row = cardCoordinates.getX();
+    public String canUseAbility(int indexPlayer, Coordinates cardAttacked) {
+        String error = checkAttack();
+        int row = cardAttacked.getX();
 
-        if (canUseAbility && (getName().equals("Disciple") && indexPlayer == 1 && row < 3 || indexPlayer == 2 && row > 2)) {
-            System.out.println("Attacked card does not belong to the current player.");
-            canUseAbility = false;
+        if (error == null && (getName().equals("Disciple") && indexPlayer == 1 && row < 3 || indexPlayer == 2 && row > 2)) {
+            error = "Attacked card does not belong to the current player.";
         }
         else if (!getName().equals("Disciple") && (indexPlayer == 1 && row > 2 || indexPlayer == 2)) {
-            System.out.println("Attacked card does not belong to the enemy.");
-            canUseAbility = false;
+            error = "Attacked card does not belong to the enemy.";
         }
         else {
             ArrayList<Coordinates> tankCards= enemyTankCards(indexPlayer);
-            assert tankCards != null;
-            if (!tankCards.contains(cardCoordinates)) {
-                System.out.println("Attacked card is not of type 'Tank'.");
-                canUseAbility = false;
+
+            if (tankCards.size() != 0 && !tankCards.contains(cardAttacked)) {
+                error = "Attacked card is not of type 'Tank'.";
             }
         }
 
-        return canUseAbility;
+        return error;
     }
 
-    public boolean canAttack(int indexPlayer, Coordinates cardCoordinates) {
-        boolean canAttack = checkAttack(indexPlayer, cardCoordinates);
-        int row = cardCoordinates.getX();
+    public String canAttack(int indexPlayer, Coordinates cardAttacked) {
+        String error  = checkAttack();
+        int row = cardAttacked.getX();
 
-        if (canAttack && (indexPlayer == 1 && row < 3 || indexPlayer == 2 && row > 2)) {
-            System.out.println("Attacked card does not belong to the enemy");
-            canAttack = false;
+        if (error == null && (indexPlayer == 1 && row < 3 || indexPlayer == 2 && row > 2)) {
+            error = "Attacked card does not belong to the enemy";
         }
         else {
             ArrayList<Coordinates> tankCards= enemyTankCards(indexPlayer);
-            assert tankCards != null;
-            if (!tankCards.contains(cardCoordinates)) {
-                System.out.println("Attacked card is not of type 'Tank'.");
-                canAttack = false;
+            if (tankCards.size() != 0 && !tankCards.contains(cardAttacked)) {
+                error = "Attacked card is not of type 'Tank'.";
             }
         }
 
-        return canAttack;
+        return error;
+    }
+
+    public String canAttackHero(int indexPlayer) {
+        String error = checkAttack();
+
+        if (error == null) {
+            ArrayList<Coordinates> tankCards = enemyTankCards(indexPlayer);
+            if (tankCards.size() != 0) {
+                error = "Attacked card is not of type 'Tank'.";
+            }
+        }
+
+        return error;
     }
 
     public boolean isTank() {
-        return isTank;
+        return tank;
     }
 
     public boolean isFrozen() {
-        return isFrozen;
+        return frozen;
     }
 
     public void setFrozen(boolean frozen) {
-        isFrozen = frozen;
+        this.frozen = frozen;
     }
 
     public boolean isOnTheFrontRow() {
-        return isOnTheFrontRow;
+        return onTheFrontRow;
     }
 
     public boolean hasAttacked() {

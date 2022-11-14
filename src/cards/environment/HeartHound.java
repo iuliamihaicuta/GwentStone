@@ -1,35 +1,20 @@
 package cards.environment;
 
+import cards.Card;
 import cards.minion.Minion;
-import fileio.CardInput;
+import fileio.Coordinates;
 import player.Player;
-
-import java.util.ArrayList;
 
 import static table.Table.*;
 
-public class HeartHound extends Environment{
-    public HeartHound(CardInput card) {
+public class HeartHound extends Environment implements SpecialAbility {
+    public HeartHound(Card card) {
         super(card);
     }
 
     @Override
-    public boolean ability(Player player, int row) {
-        if (!isEnemyRow(player.getId(), row)) {
-            System.out.println("Chosen row does not belong to the enemy.");
-            return false;
-        }
-
-        if(player.getMana() < getMana()) {
-            System.out.println("Not enough mana to use environment card.");
-        }
-
+    public void ability(Player player, int row) {
         int myRow = 3 - row;
-
-        if (getTable().get(myRow).size() == 5) {
-            System.out.println("Cannot steal enemy card since the player's row is full.");
-            return false;
-        }
 
         int maxHealth = 0;
         int cardIndex = 0;
@@ -44,8 +29,6 @@ public class HeartHound extends Environment{
         }
 
         addToRow(myRow, getTable().get(row).get(cardIndex));
-        removeFromRow(row, cardIndex);
-
-        return true;
+        removeFromRow(new Coordinates(row, cardIndex));
     }
 }

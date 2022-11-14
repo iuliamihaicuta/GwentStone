@@ -1,16 +1,16 @@
 package cards.hero;
 
+import cards.Card;
 import cards.minion.Minion;
 import fileio.CardInput;
 
 import static table.Table.getTable;
 
 public class LordRoyce extends Hero{
-    public LordRoyce(CardInput cardInput) {
-        super(cardInput);
+    public LordRoyce(Card card) {
+        super(card);
     }
 
-    @Override
     public void ability(int indexPlayer, int row) {
         if (isEnemyRow(indexPlayer, row) && !hasAttacked()) {
             int cardIndex = 0;
