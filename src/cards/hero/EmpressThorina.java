@@ -1,23 +1,40 @@
 package cards.hero;
 
 import cards.Card;
-import cards.Minion;
+import cards.minion.Minion;
 import fileio.CardInput;
 import fileio.Coordinates;
 
 import static table.Table.getTable;
 import static table.Table.removeFromRow;
 
-public class EmpressThorina extends Hero{
-    public EmpressThorina(Card card) {
+/**
+ * The type Empress thorina.
+ */
+public final class EmpressThorina extends Hero {
+    /**
+     * Instantiates a new Empress thorina.
+     *
+     * @param card the card
+     */
+    public EmpressThorina(final Card card) {
         super(card);
     }
 
-    public EmpressThorina(CardInput card) {
+    /**
+     * Instantiates a new Empress thorina.
+     *
+     * @param card the card
+     */
+    public EmpressThorina(final CardInput card) {
         super(card);
     }
 
-    public void ability(int row) {
+    /**
+     * set card ability
+     */
+    @Override
+    public void ability(final int row) {
         int cardIndex = 0;
         int maxHealth = 0;
 

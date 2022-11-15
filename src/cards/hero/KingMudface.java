@@ -1,21 +1,28 @@
 package cards.hero;
 
-import cards.Card;
-import cards.Minion;
+import cards.minion.Minion;
 import fileio.CardInput;
 
 import static table.Table.getTable;
 
-public class KingMudface extends Hero{
-    public KingMudface(Card card) {
+/**
+ * The type King mudface.
+ */
+public final class KingMudface extends Hero {
+    /**
+     * Instantiates a new King mudface.
+     *
+     * @param card the card
+     */
+    public KingMudface(final CardInput card) {
         super(card);
     }
 
-    public KingMudface(CardInput card) {
-        super(card);
-    }
-
-    public void ability(int row) {
+    /**
+     * set card ability
+     */
+    @Override
+    public void ability(final int row) {
         for (Minion card : getTable().get(row)) {
             card.setHealth(card.getHealth() + 1);
         }

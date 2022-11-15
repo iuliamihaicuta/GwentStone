@@ -1,30 +1,42 @@
 package games;
 
 import cards.Card;
-import cards.Minion;
+import cards.minion.Minion;
 import cards.environment.Environment;
-import cards.hero.EmpressThorina;
-import cards.hero.GeneralKocioraw;
-import cards.hero.KingMudface;
-import cards.hero.LordRoyce;
 import cards.minion.SpecialAbility;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.Coordinates;
 import player.Player;
-import table.Table;
 
 import java.util.ArrayList;
 
 import static cards.environment.Environment.environmentCardList;
-import static table.Table.*;
+import static constants.Constants.MAX_LENGTH_OF_ROW;
+import static table.Table.getTable;
+import static table.Table.removeFromRow;
+import static table.Table.getFrozenCards;
 
-public class CardActions {
-    public static void placeCard(Player player, int handIndex, ArrayNode output) {
+/**
+ * The type Card actions.
+ */
+public final class CardActions {
+    private CardActions() {
+    }
+
+    /**
+     * place card on table
+     *
+     * @param player    the player
+     * @param handIndex the hand index
+     * @param output    the output
+     */
+    public static void placeCard(final Player player, final int handIndex,
+                                 final ArrayNode output) {
         String error = null;
 
-        Card card = player.getHand().getHand().get(handIndex);
+        Card card = player.getHand().getCards().get(handIndex);
 
         if (environmentCardList.contains(card.getName())) {
             error = "Cannot place environment card on table.";
@@ -32,14 +44,17 @@ public class CardActions {
             error = "Not enough mana to place card on table.";
         } else {
             Minion minion = (Minion) card;
-            if (minion.isOnTheFrontRow() && player.getRows().get(0).size() == 5 ||
-                    !minion.isOnTheFrontRow() && player.getRows().get(1).size() == 5) {
+            if (minion.isOnTheFrontRow()
+                    && player.getRows().get(0).size() == MAX_LENGTH_OF_ROW
+                    || !minion.isOnTheFrontRow()
+                    && player.getRows().get(1).size() == MAX_LENGTH_OF_ROW) {
                 error = "Cannot place card on table since row is full.";
             } else {
-                if (minion.isOnTheFrontRow())
+                if (minion.isOnTheFrontRow()) {
                     player.getRows().get(0).add(minion);
-                else
+                } else {
                     player.getRows().get(1).add(minion);
+                }
 
                 player.getHand().removeFromHand(handIndex);
                 player.setMana(player.getMana() - minion.getMana());
@@ -56,7 +71,16 @@ public class CardActions {
         }
     }
 
-    public static void cardUsesAttack(Player player, Coordinates cardAttacker, Coordinates cardAttacked, ArrayNode output) {
+    /**
+     * use attack of minion card
+     *
+     * @param player       the player
+     * @param cardAttacker the card attacker
+     * @param cardAttacked the card attacked
+     * @param output       the output
+     */
+    public static void cardUsesAttack(final Player player, final Coordinates cardAttacker,
+                                      final Coordinates cardAttacked, final ArrayNode output) {
         Minion attackerCard = getTable().get(cardAttacker.getX()).get(cardAttacker.getY());
         String error = attackerCard.canAttack(player.getId(), cardAttacked);
 
@@ -64,8 +88,9 @@ public class CardActions {
             Minion attackedCard = getTable().get(cardAttacked.getX()).get(cardAttacked.getY());
             attackedCard.setHealth(attackedCard.getHealth() - attackerCard.getAttackDamage());
 
-            if (attackedCard.getHealth() <= 0)
+            if (attackedCard.getHealth() <= 0) {
                 removeFromRow(cardAttacked);
+            }
 
             getTable().get(cardAttacker.getX()).get(cardAttacker.getY()).setHasAttacked(true);
         } else {
@@ -79,7 +104,16 @@ public class CardActions {
         }
     }
 
-    public static void cardUsesAbility(Player player, Coordinates cardAttacker, Coordinates cardAttacked, ArrayNode output) {
+    /**
+     * use ability of minion card
+     *
+     * @param player       the player
+     * @param cardAttacker the card attacker
+     * @param cardAttacked the card attacked
+     * @param output       the output
+     */
+    public static void cardUsesAbility(final Player player, final Coordinates cardAttacker,
+                                       final Coordinates cardAttacked, final ArrayNode output) {
         Minion attackerCard = getTable().get(cardAttacker.getX()).get(cardAttacker.getY());
         String error = attackerCard.canUseAbility(player.getId(), cardAttacked);
 
@@ -97,8 +131,19 @@ public class CardActions {
         }
     }
 
-    public static boolean useAttackHero(Player player, Player enemy, Coordinates cardAttacker, ArrayNode output) {
-        Minion attackerCard = new Minion(getTable().get(cardAttacker.getX()).get(cardAttacker.getY()));
+    /**
+     * use card attack on hero
+     *
+     * @param player       the player
+     * @param enemy        the enemy
+     * @param cardAttacker the card attacker
+     * @param output       the output
+     * @return the boolean
+     */
+    public static boolean useAttackHero(final Player player, final Player enemy,
+                                        final Coordinates cardAttacker, final ArrayNode output) {
+        Minion attackerCard =
+                new Minion(getTable().get(cardAttacker.getX()).get(cardAttacker.getY()));
         String error = attackerCard.canAttackHero(player.getId());
 
         boolean gameEnded = false;
@@ -108,10 +153,11 @@ public class CardActions {
             getTable().get(cardAttacker.getX()).get(cardAttacker.getY()).setHasAttacked(true);
 
             if (enemy.getHero().getHealth() <= 0) {
-                if (player.getId() == 1)
+                if (player.getId() == 1) {
                     error = "Player one killed the enemy hero.";
-                else
+                } else {
                     error = "Player two killed the enemy hero.";
+                }
 
                 gameEnded = true;
             }
@@ -136,14 +182,26 @@ public class CardActions {
         return false;
     }
 
-    public static void useHeroAbility(Player player, int affectedRow, ArrayNode output) {
+    /**
+     * use hero ability
+     *
+     * @param player      the player
+     * @param affectedRow the affected row
+     * @param output      the output
+     */
+    public static void useHeroAbility(final Player player,
+                                      final int affectedRow, final ArrayNode output) {
         String error = player.getHero().canAttack(player);
 
         if (error == null) {
-            if (player.getHero().getName().equals("Lord Royce")  || player.getHero().getName().equals("Empress Thorina")) {
-                if (player.getId() == 1 && affectedRow > 1 || player.getId() == 2 && affectedRow < 2)
+            if (player.getHero().getName().equals("Lord Royce")
+                    || player.getHero().getName().equals("Empress Thorina")) {
+                if (player.getId() == 1 && affectedRow > 1
+                        || player.getId() == 2 && affectedRow < 2) {
                     error = "Selected row does not belong to the enemy.";
-            } else if(player.getId() == 1 && affectedRow < 2 || player.getId() == 2 && affectedRow > 1) {
+                }
+            } else if (player.getId() == 1 && affectedRow < 2
+                    || player.getId() == 2 && affectedRow > 1) {
                 error = "Selected row does not belong to the current player.";
             }
         }
@@ -164,19 +222,28 @@ public class CardActions {
         }
     }
 
-    public static void useEnvironmentCard(Player player, int handIndex, int affectedRow, ArrayNode output) {
-        String error = null;
+    /**
+     * use ability of environment card
+     *
+     * @param player      the player
+     * @param handIndex   the hand index
+     * @param affectedRow the affected row
+     * @param output      the output
+     */
+    public static void useEnvironmentCard(final Player player, final int handIndex,
+                                          final int affectedRow, final ArrayNode output) {
+        String error;
 
-        if (!environmentCardList.contains(player.getHand().getHand().get(handIndex).getName())) {
+        if (!environmentCardList.contains(player.getHand().getCards().get(handIndex).getName())) {
             error = "Chosen card is not of type environment.";
         } else {
-            Environment card = (Environment) player.getHand().getHand().get(handIndex);
+            Environment card = (Environment) player.getHand().getCards().get(handIndex);
             error = card.canUseAbility(player, affectedRow);
 
             if (error == null) {
                 card.ability(player, affectedRow);
                 player.setMana(player.getMana() - card.getMana());
-                player.getHand().getHand().remove(handIndex);
+                player.getHand().getCards().remove(handIndex);
             }
         }
 
@@ -191,17 +258,24 @@ public class CardActions {
         }
     }
 
-    public static void getCardsInHand(Player player, ArrayNode output) {
+    /**
+     * display list of frozen cards in hand
+     *
+     * @param player the player
+     * @param output the output
+     */
+    public static void getCardsInHand(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.put("command", "getCardsInHand");
         node.put("playerIdx", player.getId());
 
         ArrayList<Card> temp = new ArrayList<>();
-        for (Card card : player.getHand().getHand()) {
-            if (environmentCardList.contains(card.getName()))
+        for (Card card : player.getHand().getCards()) {
+            if (environmentCardList.contains(card.getName())) {
                 temp.add(temp.size(), new Environment(card));
-            else
+            } else {
                 temp.add(temp.size(), new Minion(card));
+            }
         }
 
         node.putPOJO("output", temp);
@@ -209,7 +283,12 @@ public class CardActions {
         output.addPOJO(node);
     }
 
-    public static void getCardsOnTable(ArrayNode output) {
+    /**
+     * display list of cards on table
+     *
+     * @param output the output
+     */
+    public static void getCardsOnTable(final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.put("command", "getCardsOnTable");
 
@@ -217,33 +296,49 @@ public class CardActions {
 
         for (int i = 0; i < getTable().size(); ++i) {
             temp.add(new ArrayList<>());
-            for (Minion card : getTable().get(i))
+            for (Minion card : getTable().get(i)) {
                 temp.get(i).add(new Minion(card));
+            }
         }
         node.putPOJO("output", temp);
 
         output.addPOJO(node);
     }
 
-    public static void getCardAtPosition(int x, int y, ArrayNode output) {
+    /**
+     * display card at given position
+     *
+     * @param x      the x
+     * @param y      the y
+     * @param output the output
+     */
+    public static void getCardAtPosition(final int x, final int y, final ArrayNode output) {
         String error = null;
-        if (y >= getTable().get(x).size())
+        if (y >= getTable().get(x).size()) {
             error = "No card available at that position.";
+        }
 
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.put("command", "getCardAtPosition");
         node.put("x", x);
         node.put("y", y);
 
-        if (error == null)
+        if (error == null) {
             node.putPOJO("output", new Minion(getTable().get(x).get(y)));
-        else
+        } else {
             node.put("output", error);
+        }
 
         output.addPOJO(node);
     }
 
-    public static void getEnvironmentCardsInHand(Player player, ArrayNode output) {
+    /**
+     * display list of environment cards in hand
+     *
+     * @param player the player
+     * @param output the output
+     */
+    public static void getEnvironmentCardsInHand(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.put("command", "getEnvironmentCardsInHand");
         node.put("playerIdx", player.getId());
@@ -252,7 +347,12 @@ public class CardActions {
         output.addPOJO(node);
     }
 
-    public static void getFrozenCardsOnTable(ArrayNode output) {
+    /**
+     * display list of frozen cards on table
+     *
+     * @param output the output
+     */
+    public static void getFrozenCardsOnTable(final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.put("command", "getFrozenCardsOnTable");
         node.putPOJO("output", getFrozenCards());

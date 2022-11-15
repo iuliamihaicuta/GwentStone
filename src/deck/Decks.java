@@ -1,17 +1,24 @@
 package deck;
 
 import cards.Card;
-import fileio.CardInput;
 import fileio.DecksInput;
 
 import java.util.ArrayList;
 
+/**
+ * The type Decks.
+ */
 public class Decks {
-    private int nrCardsInDeck;
-    private int nrDecks;
-    private ArrayList<ArrayList<Card>> decks;
+    private final int nrCardsInDeck;
+    private final int nrDecks;
+    private final ArrayList<ArrayList<Card>> decks;
 
-    public Decks(DecksInput decksInput) {
+    /**
+     * Instantiates a new Decks.
+     *
+     * @param decksInput the decks input
+     */
+    public Decks(final DecksInput decksInput) {
         this.decks = new ArrayList<>();
 
         for (int i = 0; i < decksInput.getNrDecks(); ++i) {
@@ -20,32 +27,41 @@ public class Decks {
                 decks.get(i).add(new Card(decksInput.getDecks().get(i).get(j)));
             }
         }
+
+        this.nrCardsInDeck = decksInput.getNrCardsInDeck();
+        this.nrDecks = decksInput.getNrDecks();
     }
 
+    /**
+     * get number of cards in deck
+     *
+     * @return the nr cards in deck
+     */
     public int getNrCardsInDeck() {
         return nrCardsInDeck;
     }
 
-    public void setNrCardsInDeck(final int nrCardsInDeck) {
-        this.nrCardsInDeck = nrCardsInDeck;
-    }
-
+    /**
+     * get number of decks
+     *
+     * @return the nr decks
+     */
     public int getNrDecks() {
         return nrDecks;
     }
 
-    public void setNrDecks(final int nrDecks) {
-        this.nrDecks = nrDecks;
-    }
-
+    /**
+     * get player's decks
+     *
+     * @return the decks
+     */
     public ArrayList<ArrayList<Card>> getDecks() {
         return decks;
     }
 
-    public void setDecks(final ArrayList<ArrayList<Card>> decks) {
-        this.decks = decks;
-    }
-
+    /**
+     * override toString() method
+     */
     @Override
     public String toString() {
         return "InfoInput{"

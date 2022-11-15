@@ -1,28 +1,40 @@
 package cards.environment;
 
 import cards.Card;
-import cards.Minion;
+import cards.minion.Minion;
 import player.Player;
 
 import java.util.ArrayList;
 
 import static table.Table.getTable;
 
-public class Firestorm extends Environment{
+/**
+ * The type Firestorm.
+ */
+public final class Firestorm extends Environment {
 
-    public Firestorm(Card card) {
+    /**
+     * Instantiates a new Firestorm.
+     *
+     * @param card the card
+     */
+    public Firestorm(final Card card) {
         super(card);
     }
 
+    /**
+     * set card ability
+     */
     @Override
-    public void ability(Player player, int row) {
+    public void ability(final Player player, final int row) {
         ArrayList<Minion> copyList = new ArrayList<>(getTable().get(row));
 
         for (Minion card : copyList) {
             card.setHealth(card.getHealth() - 1);
 
-            if (card.getHealth() <= 0)
+            if (card.getHealth() <= 0) {
                 getTable().get(row).remove(card);
+            }
         }
     }
 }

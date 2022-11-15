@@ -5,23 +5,44 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CardInput;
 import player.Player;
 
+import static constants.Constants.PLAYER1_SECOND_ROW;
+import static constants.Constants.HERO_HEALTH;
+
+/**
+ * The type Hero.
+ */
 public class Hero extends Card {
     @JsonIgnore
     private boolean hasAttacked = false;
     @JsonIgnore
     private int attackDamage;
-    public Hero(CardInput cardInput) {
+
+    /**
+     * Instantiates a new Hero.
+     *
+     * @param cardInput the card input
+     */
+    public Hero(final CardInput cardInput) {
         super(cardInput);
-        setHealth(30);
+        setHealth(HERO_HEALTH);
     }
 
-    public Hero(Card card) {
+    /**
+     * Instantiates a new Hero.
+     *
+     * @param card the card
+     */
+    public Hero(final Card card) {
         super(card);
     }
 
-//    public  void ability(int indexPlayer, int row);
-
-    public String canAttack(Player player) {
+    /**
+     * check if hero can attack
+     *
+     * @param player the player
+     * @return the string
+     */
+    public String canAttack(final Player player) {
         String error = null;
 
         if (player.getMana() < getMana()) {
@@ -33,17 +54,20 @@ public class Hero extends Card {
         return error;
     }
 
-    protected boolean isEnemyRow(int indexPlayer, int indexRow) {
-        return indexPlayer == 1 && indexRow < 3 || indexPlayer == 2 && indexRow > 2;
-    }
-
-    public boolean hasAttacked() {
-        return hasAttacked;
-    }
-
-    public void setHasAttacked(boolean hasAttacked) {
+    /**
+     * set card hasAttacked status
+     *
+     * @param hasAttacked the has attacked
+     */
+    public void setHasAttacked(final boolean hasAttacked) {
         this.hasAttacked = hasAttacked;
     }
 
-    public void ability(int row) {};
+    /**
+     * set card ability
+     *
+     * @param row the row
+     */
+    public void ability(final int row) {
+    }
 }

@@ -4,15 +4,23 @@ import fileio.CardInput;
 
 import java.util.ArrayList;
 
+/**
+ * The type Card.
+ */
 public class Card {
-    private int mana;
+    private final int mana;
     private int attackDamage;
     private int health;
-    private String description;
-    private ArrayList<String> colors;
-    private String name;
+    private final String description;
+    private final ArrayList<String> colors;
+    private final String name;
 
-    public Card(CardInput cardInput) {
+    /**
+     * Instantiates a new Card.
+     *
+     * @param cardInput the card input
+     */
+    public Card(final CardInput cardInput) {
         this.mana = cardInput.getMana();
         this.attackDamage = cardInput.getAttackDamage();
         this.health = cardInput.getHealth();
@@ -21,7 +29,12 @@ public class Card {
         this.name = cardInput.getName();
     }
 
-    public Card(Card card) {
+    /**
+     * Instantiates a new Card.
+     *
+     * @param card the card
+     */
+    public Card(final Card card) {
         this.mana = card.mana;
         this.attackDamage = card.attackDamage;
         this.health = card.health;
@@ -30,54 +43,81 @@ public class Card {
         this.name = card.name;
     }
 
+    /**
+     * get card mana
+     *
+     * @return the mana
+     */
     public int getMana() {
         return mana;
     }
 
-    public void setMana(final int mana) {
-        this.mana = mana;
-    }
-
+    /**
+     * get card attack damage
+     *
+     * @return the attack damage
+     */
     public int getAttackDamage() {
         return attackDamage;
     }
 
+    /**
+     * set card attack damage
+     *
+     * @param attackDamage the attack damage
+     */
     public void setAttackDamage(final int attackDamage) {
         this.attackDamage = attackDamage;
     }
 
+    /**
+     * get card health
+     *
+     * @return the health
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * set card health
+     *
+     * @param health the health
+     */
     public void setHealth(final int health) {
         this.health = health;
     }
 
+    /**
+     * get card description
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
+    /**
+     * get card colors
+     *
+     * @return the colors
+     */
     public ArrayList<String> getColors() {
         return colors;
     }
 
-    public void setColors(final ArrayList<String> colors) {
-        this.colors = colors;
-    }
-
+    /**
+     * get card name
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
-
+    /**
+     * override toString() method
+     */
     @Override
     public String toString() {
         return "CardInput{"

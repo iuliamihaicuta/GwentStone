@@ -1,17 +1,18 @@
-package cards;
+package cards.minion;
 
+import cards.Card;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import fileio.Coordinates;
-
-import java.util.ArrayList;
 
 import static table.Table.enemyHasTankCards;
 import static table.Table.getTable;
 
+/**
+ * The type Minion.
+ */
 public class Minion extends Card {
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private final boolean tank;
     @JsonIgnore
     private boolean frozen = false;
@@ -20,41 +21,55 @@ public class Minion extends Card {
     @JsonIgnore
     private boolean hasAttacked = false;
 
-    public Minion(Card card) {
+    /**
+     * Instantiates a new Minion.
+     *
+     * @param card the card
+     */
+    public Minion(final Card card) {
         super(card);
         tank = getName().equals("Goliath") || getName().equals("Warden");
         onTheFrontRow = getName().equals("The Ripper") || getName().equals("Miraj")
                 || getName().equals("Goliath") || getName().equals("Warden");
     }
 
-    public Minion(Minion card) {
-        super((Card) card);
+    /**
+     * Instantiates a new Minion.
+     *
+     * @param card the card
+     */
+    public Minion(final Minion card) {
+        super(card);
         this.tank = card.tank;
         this.frozen = card.frozen;
         this.onTheFrontRow = card.onTheFrontRow;
         this.hasAttacked = card.hasAttacked;
     }
 
-    // TODO protected
-    public String canUseAbility(int indexPlayer, Coordinates cardAttacked) {
+    /**
+     * check if card can use ability
+     *
+     * @param indexPlayer  the index player
+     * @param cardAttacked the card attacked
+     * @return the string
+     */
+    public String canUseAbility(final int indexPlayer, final Coordinates cardAttacked) {
         String error = null;
         int row = cardAttacked.getX();
 
         if (frozen) {
             error = "Attacker card is frozen.";
-        }
-        else if (hasAttacked) {
+        } else if (hasAttacked) {
             error = "Attacker card has already attacked this turn.";
-        }
-        else if ((getName().equals("Disciple") && (indexPlayer == 1 && row < 2 || indexPlayer == 2 && row > 1))) {
+        } else if ((getName().equals("Disciple")
+                && (indexPlayer == 1 && row < 2 || indexPlayer == 2 && row > 1))) {
             error = "Attacked card does not belong to the current player.";
-        }
-        else if (!getName().equals("Disciple") && (indexPlayer == 1 && row > 1 || indexPlayer == 2 && row < 2)) {
+        } else if (!getName().equals("Disciple")
+                && (indexPlayer == 1 && row > 1 || indexPlayer == 2 && row < 2)) {
             error = "Attacked card does not belong to the enemy.";
-        }
-        else if (!getName().equals("Disciple")) {
-            if (enemyHasTankCards(indexPlayer) && !getTable().get(cardAttacked.getX()).get(cardAttacked.getY()).isTank()) {
-                ArrayList<ArrayList<Minion>> table = getTable();
+        } else if (!getName().equals("Disciple")) {
+            if (enemyHasTankCards(indexPlayer)
+                    && !getTable().get(cardAttacked.getX()).get(cardAttacked.getY()).isTank()) {
                 error = "Attacked card is not of type 'Tank'.";
             }
         }
@@ -62,21 +77,26 @@ public class Minion extends Card {
         return error;
     }
 
-    public String canAttack(int indexPlayer, Coordinates cardAttacked) {
+    /**
+     * check if card can attack another minion
+     *
+     * @param indexPlayer  the index player
+     * @param cardAttacked the card attacked
+     * @return the string
+     */
+    public String canAttack(final int indexPlayer, final Coordinates cardAttacked) {
         String error  = null;
         int row = cardAttacked.getX();
 
         if ((indexPlayer == 1 && row > 1 || indexPlayer == 2 && row < 2)) {
             error = "Attacked card does not belong to the enemy.";
-        }
-        else if (hasAttacked) {
+        } else if (hasAttacked) {
             error = "Attacker card has already attacked this turn.";
-        }
-        else if (frozen) {
+        } else if (frozen) {
             error = "Attacker card is frozen.";
-        }
-        else {
-            if (enemyHasTankCards(indexPlayer) && !getTable().get(cardAttacked.getX()).get(cardAttacked.getY()).isTank()) {
+        } else {
+            if (enemyHasTankCards(indexPlayer)
+                    && !getTable().get(cardAttacked.getX()).get(cardAttacked.getY()).isTank()) {
                 error = "Attacked card is not of type 'Tank'.";
             }
         }
@@ -84,13 +104,18 @@ public class Minion extends Card {
         return error;
     }
 
-    public String canAttackHero(int indexPlayer) {
+    /**
+     * check if card can attack hero
+     *
+     * @param indexPlayer the index player
+     * @return the string
+     */
+    public String canAttackHero(final int indexPlayer) {
         String error = null;
 
         if (frozen) {
             error = "Attacker card is frozen.";
-        }
-        else if (hasAttacked) {
+        } else if (hasAttacked) {
             error = "Attacker card has already attacked this turn.";
         } else {
             if (enemyHasTankCards(indexPlayer)) {
@@ -101,27 +126,48 @@ public class Minion extends Card {
         return error;
     }
 
+    /**
+     * get card tank status
+     *
+     * @return the boolean
+     */
     public boolean isTank() {
         return tank;
     }
 
+    /**
+     * get card frozen status
+     *
+     * @return the boolean
+     */
     public boolean isFrozen() {
         return frozen;
     }
 
-    public void setFrozen(boolean frozen) {
+    /**
+     * set card frozen status
+     *
+     * @param frozen the frozen
+     */
+    public void setFrozen(final boolean frozen) {
         this.frozen = frozen;
     }
 
+    /**
+     * get card isOnTheFrontRow status
+     *
+     * @return the boolean
+     */
     public boolean isOnTheFrontRow() {
         return onTheFrontRow;
     }
 
-    public boolean hasAttacked() {
-        return hasAttacked;
-    }
-
-    public void setHasAttacked(boolean hasAttacked) {
+    /**
+     * set card hasAttacked status
+     *
+     * @param hasAttacked the has attacked
+     */
+    public void setHasAttacked(final boolean hasAttacked) {
         this.hasAttacked = hasAttacked;
     }
 

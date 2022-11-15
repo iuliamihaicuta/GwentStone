@@ -1,20 +1,34 @@
 package cards.environment;
 
 import cards.Card;
-import cards.Minion;
+import cards.minion.Minion;
 import fileio.Coordinates;
 import player.Player;
 
-import static table.Table.*;
+import static constants.Constants.NUMBER_OF_ROWS;
+import static table.Table.getTable;
+import static table.Table.addToRow;
+import static table.Table.removeFromRow;
 
-public class HeartHound extends Environment{
-    public HeartHound(Card card) {
+/**
+ * The type Heart hound.
+ */
+public final class HeartHound extends Environment {
+    /**
+     * Instantiates a new Heart hound.
+     *
+     * @param card the card
+     */
+    public HeartHound(final Card card) {
         super(card);
     }
 
+    /**
+     * set card ability
+     */
     @Override
-    public void ability(Player player, int row) {
-        int myRow = 3 - row;
+    public void ability(final Player player, final int row) {
+        int myRow = NUMBER_OF_ROWS - row - 1;
 
         int maxHealth = 0;
         int cardIndex = 0;

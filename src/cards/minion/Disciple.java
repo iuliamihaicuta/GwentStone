@@ -1,18 +1,28 @@
 package cards.minion;
 
 import cards.Card;
-import cards.Minion;
 import fileio.Coordinates;
 
 import static table.Table.getTable;
 
-public class Disciple extends Minion implements SpecialAbility {
-    public Disciple(Card card) {
+/**
+ * The type Disciple.
+ */
+public final class Disciple extends Minion implements SpecialAbility {
+    /**
+     * Instantiates a new Disciple.
+     *
+     * @param card the card
+     */
+    public Disciple(final Card card) {
         super(card);
     }
 
+    /**
+     * set card ability
+     */
     @Override
-    public void ability(int indexPlayer, Coordinates cardAttacked) {
+    public void ability(final int indexPlayer, final Coordinates cardAttacked) {
         Minion card = getTable().get(cardAttacked.getX()).get(cardAttacked.getY());
         card.setHealth(card.getHealth() + 2);
 

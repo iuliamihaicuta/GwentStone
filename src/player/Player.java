@@ -1,7 +1,7 @@
 package player;
 
 import cards.Card;
-import cards.Minion;
+import cards.minion.Minion;
 import cards.environment.Environment;
 import cards.environment.Firestorm;
 import cards.environment.HeartHound;
@@ -19,6 +19,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import static constants.Constants.MAX_MANA;
+
+/**
+ * The type Player.
+ */
 public class Player {
     private final Decks decks;
     private int mana;
@@ -30,7 +35,16 @@ public class Player {
     private final ArrayList<ArrayList<Minion>> rows;
     private Hero hero;
 
-    public Player(DecksInput decks, ArrayList<Minion> frontRow, ArrayList<Minion> backRow, int id) {
+    /**
+     * Instantiates a new Player.
+     *
+     * @param decks    the decks
+     * @param frontRow the front row
+     * @param backRow  the back row
+     * @param id       the id
+     */
+    public Player(final DecksInput decks, final ArrayList<Minion> frontRow,
+                  final ArrayList<Minion> backRow, final int id) {
         this.decks = new Decks(decks);
         hand = new Hand();
         this.id = id;
@@ -40,56 +54,122 @@ public class Player {
         this.rows.add(1, backRow);
     }
 
+    /**
+     * get player mana
+     *
+     * @return the mana
+     */
     public int getMana() {
         return mana;
     }
 
-    public void setMana(int mana) {
+    /**
+     * set player mana
+     *
+     * @param mana the mana
+     */
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
+    /**
+     * get games played
+     *
+     * @return the games played
+     */
     public static int getGamesPlayed() {
         return gamesPlayed;
     }
 
-    public static void setGamesPlayed(int gamesPlayed) {
+    /**
+     * set games played
+     *
+     * @param gamesPlayed the games played
+     */
+    public static void setGamesPlayed(final int gamesPlayed) {
         Player.gamesPlayed = gamesPlayed;
     }
 
+    /**
+     * get player wins
+     *
+     * @return the total games won
+     */
     public int getTotalGamesWon() {
         return totalGamesWon;
     }
 
-    public void setTotalGamesWon(int totalGamesWon) {
+    /**
+     * set player won games
+     *
+     * @param totalGamesWon the total games won
+     */
+    public void setTotalGamesWon(final int totalGamesWon) {
         this.totalGamesWon = totalGamesWon;
     }
 
+    /**
+     * get player current deck
+     *
+     * @return the used deck
+     */
     public ArrayList<Card> getUsedDeck() {
         return usedDeck;
     }
 
+    /**
+     * get player id
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * get player hand
+     *
+     * @return the hand
+     */
     public Hand getHand() {
         return hand;
     }
 
+    /**
+     * get player rows
+     *
+     * @return the rows
+     */
     public ArrayList<ArrayList<Minion>> getRows() {
         return rows;
     }
 
+    /**
+     * get player hero
+     *
+     * @return the hero
+     */
     public Hero getHero() {
         return hero;
     }
 
-    public void setHero(Hero hero) {
+    /**
+     * set player hero
+     *
+     * @param hero the hero
+     */
+    public void setHero(final Hero hero) {
         this.hero = hero;
     }
 
-    public void shuffleDeck(int deckIndex, int shuffleSeed) {
-        usedDeck = new ArrayList<Card>();
+    /**
+     * set the deck the player uses in the current game
+     *
+     * @param deckIndex   the deck index
+     * @param shuffleSeed the shuffle seed
+     */
+    public void shuffleDeck(final int deckIndex, final int shuffleSeed) {
+        usedDeck = new ArrayList<>();
 
         for (Card card : decks.getDecks().get(deckIndex)) {
             if (Environment.environmentCardList.contains(card.getName())) {
@@ -99,8 +179,7 @@ public class Player {
                     case "Winterfell" -> usedDeck.add(new Winterfell(card));
                     default -> System.err.println("ERROR: Environment card does not exist.");
                 }
-            }
-            else {
+            } else {
                 switch (card.getName()) {
                     case "Disciple" -> usedDeck.add(new Disciple(card));
                     case "Miraj" -> usedDeck.add(new Miraj(card));
@@ -114,8 +193,13 @@ public class Player {
         Collections.shuffle(usedDeck, new Random(shuffleSeed));
     }
 
-    public void startTurn(int round) {
-        mana += Math.min(round, 10);
+    /**
+     * prepare player for the start of the game
+     *
+     * @param round the round
+     */
+    public void startTurn(final int round) {
+        mana += Math.min(round, MAX_MANA);
         if (usedDeck.size() > 0) {
             hand.addToHand(usedDeck.remove(0));
         }

@@ -5,36 +5,60 @@ import cards.environment.Environment;
 
 import java.util.ArrayList;
 
+/**
+ * The type Hand.
+ */
 public class Hand {
-    private ArrayList<Card> hand;
+    private final ArrayList<Card> cards;
 
+    /**
+     * Instantiates a new Hand.
+     */
     public Hand() {
-        hand = new ArrayList<Card>();
+        cards = new ArrayList<>();
     }
 
-    public void removeFromHand(int cardIndex) {
-        hand.remove(cardIndex);
+    /**
+     * remove card from hand
+     *
+     * @param cardIndex the card index
+     */
+    public void removeFromHand(final int cardIndex) {
+        cards.remove(cardIndex);
     }
 
-    public void addToHand(Card card) {
-        hand.add(card);
+    /**
+     * add card to hand
+     *
+     * @param card the card
+     */
+    public void addToHand(final Card card) {
+        cards.add(card);
     }
 
+    /**
+     * return list of current environment cards in hand
+     *
+     * @return the environment cards
+     */
     public ArrayList<Card> getEnvironmentCards() {
-        ArrayList<Card> environmentCards = new ArrayList<Card>();
-        for (Card card : hand) {
-            if (Environment.environmentCardList.contains(card.getName()))
+        ArrayList<Card> environmentCards = new ArrayList<>();
+        for (Card card : cards) {
+            if (Environment.environmentCardList.contains(card.getName())) {
                 environmentCards.add(card);
+            }
         }
 
         return environmentCards;
     }
 
-    public ArrayList<Card> getHand() {
-        return hand;
+    /**
+     * return list of current cards in hand
+     *
+     * @return the cards
+     */
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
-    public void setHand(ArrayList<Card> hand) {
-        this.hand = hand;
-    }
 }
