@@ -1,0 +1,6 @@
+Starting audit...
+[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\cards\environment\Environment.java:26:38: Name 'environmentCardList' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
+[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\cards\hero\Hero.java:8:15: Unused import - constants.Constants.PLAYER1_SECOND_ROW. [UnusedImports]
+[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\table\Table.java:13:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+Audit done.
+Checkstyle ends with 3 errors.
