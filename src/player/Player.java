@@ -1,8 +1,16 @@
 package player;
 
 import cards.Card;
+import cards.Minion;
+import cards.environment.Environment;
+import cards.environment.Firestorm;
+import cards.environment.HeartHound;
+import cards.environment.Winterfell;
 import cards.hero.Hero;
-import cards.minion.Minion;
+import cards.minion.Disciple;
+import cards.minion.Miraj;
+import cards.minion.TheCursedOne;
+import cards.minion.TheRipper;
 import deck.Decks;
 import fileio.DecksInput;
 import table.Hand;
@@ -12,40 +20,24 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Player {
-    private int deckIndex;
-    private Decks decks;
+    private final Decks decks;
     private int mana;
     private static int gamesPlayed = 0;
     private int totalGamesWon = 0;
     private final int id;
     private ArrayList<Card> usedDeck;
-    private Hand hand;
-    private ArrayList<ArrayList<Minion>> rows;
+    private final Hand hand;
+    private final ArrayList<ArrayList<Minion>> rows;
     private Hero hero;
 
     public Player(DecksInput decks, ArrayList<Minion> frontRow, ArrayList<Minion> backRow, int id) {
         this.decks = new Decks(decks);
         hand = new Hand();
-        rows = new ArrayList<ArrayList<Minion>>();
-        this.rows.add(frontRow);
-        this.rows.add(backRow);
         this.id = id;
-    }
 
-    public Decks getDecks() {
-        return decks;
-    }
-
-    public void setDecks(Decks decks) {
-        this.decks = decks;
-    }
-
-    public int getDeckIndex() {
-        return deckIndex;
-    }
-
-    public void setDeckIndex(int deckIndex) {
-        this.deckIndex = deckIndex;
+        rows = new ArrayList<>();
+        this.rows.add(0, frontRow);
+        this.rows.add(1, backRow);
     }
 
     public int getMana() {
@@ -76,10 +68,6 @@ public class Player {
         return usedDeck;
     }
 
-    public void setUsedDeck(ArrayList<Card> usedDeck) {
-        this.usedDeck = usedDeck;
-    }
-
     public int getId() {
         return id;
     }
@@ -88,16 +76,8 @@ public class Player {
         return hand;
     }
 
-    public void setHand(Hand hand) {
-        this.hand = hand;
-    }
-
     public ArrayList<ArrayList<Minion>> getRows() {
         return rows;
-    }
-
-    public void setRows(ArrayList<ArrayList<Minion>> rows) {
-        this.rows = rows;
     }
 
     public Hero getHero() {
@@ -111,19 +91,33 @@ public class Player {
     public void shuffleDeck(int deckIndex, int shuffleSeed) {
         usedDeck = new ArrayList<Card>();
 
-        for (Card card : decks.getDecks().get(deckIndex))
-            usedDeck.add(new Card(card));
+        for (Card card : decks.getDecks().get(deckIndex)) {
+            if (Environment.environmentCardList.contains(card.getName())) {
+                switch (card.getName()) {
+                    case "Firestorm" -> usedDeck.add(new Firestorm(card));
+                    case "Heart Hound" -> usedDeck.add(new HeartHound(card));
+                    case "Winterfell" -> usedDeck.add(new Winterfell(card));
+                    default -> System.err.println("ERROR: Environment card does not exist.");
+                }
+            }
+            else {
+                switch (card.getName()) {
+                    case "Disciple" -> usedDeck.add(new Disciple(card));
+                    case "Miraj" -> usedDeck.add(new Miraj(card));
+                    case "The Cursed One" -> usedDeck.add(new TheCursedOne(card));
+                    case "The Ripper" -> usedDeck.add(new TheRipper(card));
+                    default -> usedDeck.add(new Minion(card));
+                }
+            }
+        }
 
         Collections.shuffle(usedDeck, new Random(shuffleSeed));
     }
 
     public void startTurn(int round) {
         mana += Math.min(round, 10);
-//        if (usedDeck.size() > 0)
-//            hand.getHand().add(usedDeck.remove(0));
-
-        hand.getHand().add(new Card(usedDeck.get(0)));
-        usedDeck.remove(0);
+        if (usedDeck.size() > 0) {
+            hand.addToHand(usedDeck.remove(0));
+        }
     }
-
 }

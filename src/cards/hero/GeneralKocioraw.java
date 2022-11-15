@@ -1,7 +1,7 @@
 package cards.hero;
 
 import cards.Card;
-import cards.minion.Minion;
+import cards.Minion;
 import fileio.CardInput;
 
 import static table.Table.getTable;
@@ -11,13 +11,15 @@ public class GeneralKocioraw extends Hero{
         super(card);
     }
 
-    public void ability(int indexPlayer, int row) {
-        if (!isEnemyRow(indexPlayer, row) && !hasAttacked()) {
-            for (Minion card : getTable().get(row)) {
-                card.setAttackDamage(card.getAttackDamage() + 1);
-            }
+    public GeneralKocioraw(CardInput card) {
+        super(card);
+    }
 
-            setHasAttacked(true);
+    public void ability(int row) {
+        for (Minion card : getTable().get(row)) {
+            card.setAttackDamage(card.getAttackDamage() + 1);
         }
+
+        setHasAttacked(true);
     }
 }

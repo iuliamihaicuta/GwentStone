@@ -1,13 +1,13 @@
 package cards.environment;
 
 import cards.Card;
-import cards.minion.Minion;
+import cards.Minion;
 import fileio.Coordinates;
 import player.Player;
 
 import static table.Table.*;
 
-public class HeartHound extends Environment implements SpecialAbility {
+public class HeartHound extends Environment{
     public HeartHound(Card card) {
         super(card);
     }

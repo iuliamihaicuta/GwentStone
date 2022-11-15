@@ -1,15 +1,13 @@
-package cards.minion;
+package cards;
 
-import cards.Card;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fileio.Coordinates;
-import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static table.Table.enemyTankCards;
+import static table.Table.enemyHasTankCards;
+import static table.Table.getTable;
 
 public class Minion extends Card {
 
@@ -21,13 +19,6 @@ public class Minion extends Card {
     private final boolean onTheFrontRow;
     @JsonIgnore
     private boolean hasAttacked = false;
-
-    public static final List<String> simpleMinionCardList =
-            List.of("Sentinel", "Berserker", "Goliath", "Warden");
-    public static final List<String> abilityMinionCardList =
-            List.of("The ripper", "Miraj", "The Cursed One", "Disciple");
-    public static final List<String> useAbilityOnEnemyCardList =
-            List.of("The ripper", "Miraj", "The Cursed One");
 
     public Minion(Card card) {
         super(card);
@@ -44,8 +35,10 @@ public class Minion extends Card {
         this.hasAttacked = card.hasAttacked;
     }
 
-    private String checkAttack() {
+    // TODO protected
+    public String canUseAbility(int indexPlayer, Coordinates cardAttacked) {
         String error = null;
+        int row = cardAttacked.getX();
 
         if (frozen) {
             error = "Attacker card is frozen.";
@@ -53,25 +46,15 @@ public class Minion extends Card {
         else if (hasAttacked) {
             error = "Attacker card has already attacked this turn.";
         }
-
-        return error;
-    }
-
-    // TODO protected
-    public String canUseAbility(int indexPlayer, Coordinates cardAttacked) {
-        String error = checkAttack();
-        int row = cardAttacked.getX();
-
-        if (error == null && (getName().equals("Disciple") && indexPlayer == 1 && row < 3 || indexPlayer == 2 && row > 2)) {
+        else if ((getName().equals("Disciple") && (indexPlayer == 1 && row < 2 || indexPlayer == 2 && row > 1))) {
             error = "Attacked card does not belong to the current player.";
         }
-        else if (!getName().equals("Disciple") && (indexPlayer == 1 && row > 2 || indexPlayer == 2)) {
+        else if (!getName().equals("Disciple") && (indexPlayer == 1 && row > 1 || indexPlayer == 2 && row < 2)) {
             error = "Attacked card does not belong to the enemy.";
         }
-        else {
-            ArrayList<Coordinates> tankCards= enemyTankCards(indexPlayer);
-
-            if (tankCards.size() != 0 && !tankCards.contains(cardAttacked)) {
+        else if (!getName().equals("Disciple")) {
+            if (enemyHasTankCards(indexPlayer) && !getTable().get(cardAttacked.getX()).get(cardAttacked.getY()).isTank()) {
+                ArrayList<ArrayList<Minion>> table = getTable();
                 error = "Attacked card is not of type 'Tank'.";
             }
         }
@@ -80,15 +63,20 @@ public class Minion extends Card {
     }
 
     public String canAttack(int indexPlayer, Coordinates cardAttacked) {
-        String error  = checkAttack();
+        String error  = null;
         int row = cardAttacked.getX();
 
-        if (error == null && (indexPlayer == 1 && row < 3 || indexPlayer == 2 && row > 2)) {
-            error = "Attacked card does not belong to the enemy";
+        if ((indexPlayer == 1 && row > 1 || indexPlayer == 2 && row < 2)) {
+            error = "Attacked card does not belong to the enemy.";
+        }
+        else if (hasAttacked) {
+            error = "Attacker card has already attacked this turn.";
+        }
+        else if (frozen) {
+            error = "Attacker card is frozen.";
         }
         else {
-            ArrayList<Coordinates> tankCards= enemyTankCards(indexPlayer);
-            if (tankCards.size() != 0 && !tankCards.contains(cardAttacked)) {
+            if (enemyHasTankCards(indexPlayer) && !getTable().get(cardAttacked.getX()).get(cardAttacked.getY()).isTank()) {
                 error = "Attacked card is not of type 'Tank'.";
             }
         }
@@ -97,11 +85,15 @@ public class Minion extends Card {
     }
 
     public String canAttackHero(int indexPlayer) {
-        String error = checkAttack();
+        String error = null;
 
-        if (error == null) {
-            ArrayList<Coordinates> tankCards = enemyTankCards(indexPlayer);
-            if (tankCards.size() != 0) {
+        if (frozen) {
+            error = "Attacker card is frozen.";
+        }
+        else if (hasAttacked) {
+            error = "Attacker card has already attacked this turn.";
+        } else {
+            if (enemyHasTankCards(indexPlayer)) {
                 error = "Attacked card is not of type 'Tank'.";
             }
         }

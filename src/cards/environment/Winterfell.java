@@ -1,12 +1,12 @@
 package cards.environment;
 
 import cards.Card;
-import cards.minion.Minion;
+import cards.Minion;
 import player.Player;
 
 import static table.Table.getTable;
 
-public class Winterfell extends Environment implements SpecialAbility {
+public class Winterfell extends Environment{
     public Winterfell(Card card) {
         super(card);
     }

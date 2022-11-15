@@ -17,7 +17,6 @@ public class Hero extends Card {
 
     public Hero(Card card) {
         super(card);
-        setHealth(30);
     }
 
 //    public  void ability(int indexPlayer, int row);
@@ -45,4 +44,6 @@ public class Hero extends Card {
     public void setHasAttacked(boolean hasAttacked) {
         this.hasAttacked = hasAttacked;
     }
+
+    public void ability(int row) {};
 }

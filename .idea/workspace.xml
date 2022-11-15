@@ -4,38 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="add actions">
-      <change afterPath="$PROJECT_DIR$/input/test04_use_environment_card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test05_use_environment_card_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test06_attack_card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test07_attack_card_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test08_use_card_ability.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test09_use_card_ability_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test10_attack_hero.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test11_attack_hero_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test13_use_hero_ability_2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/test14_use_hero_ability_1_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test04_use_environment_card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test05_use_environment_card_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test06_attack_card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test07_attack_card_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test08_use_card_ability.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test09_use_card_ability_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test10_attack_hero.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test11_attack_hero_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test13_use_hero_ability_2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ref/ref_test14_use_hero_ability_1_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result/out_test01_game_start.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result/out_test02_place_card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result/out_test03_place_card_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result/out_test04_use_environment_card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result/out_test05_use_environment_card_invalid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result/out_test06_attack_card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cards/environment/SpecialAbility.java" afterDir="false" />
+    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="update cards and players actions">
+      <change afterPath="$PROJECT_DIR$/input/test12_use_hero_ability_1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test15_use_hero_ability_2_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test16_multiple_games_valid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test17_multiple_games_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test18_big_game.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test07_attack_card_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test08_use_card_ability.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test09_use_card_ability_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test10_attack_hero.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test11_attack_hero_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test12_use_hero_ability_1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test13_use_hero_ability_2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test14_use_hero_ability_1_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test15_use_hero_ability_2_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test16_multiple_games_valid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test17_multiple_games_invalid.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result/out_test18_big_game.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/out_test01_game_start.json" beforeDir="false" afterPath="$PROJECT_DIR$/result/out_test01_game_start.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/out_test02_place_card.json" beforeDir="false" afterPath="$PROJECT_DIR$/result/out_test02_place_card.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/out_test03_place_card_invalid.json" beforeDir="false" afterPath="$PROJECT_DIR$/result/out_test03_place_card_invalid.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/out_test04_use_environment_card.json" beforeDir="false" afterPath="$PROJECT_DIR$/result/out_test04_use_environment_card.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/out_test05_use_environment_card_invalid.json" beforeDir="false" afterPath="$PROJECT_DIR$/result/out_test05_use_environment_card_invalid.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/out_test06_attack_card.json" beforeDir="false" afterPath="$PROJECT_DIR$/result/out_test06_attack_card.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/environment/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Environment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/environment/Firestorm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Firestorm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/environment/HeartHound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/HeartHound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environment/SpecialAbility.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/environment/Winterfell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Winterfell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/hero/EmpressThorina.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/hero/EmpressThorina.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/hero/GeneralKocioraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/hero/GeneralKocioraw.java" afterDir="false" />
@@ -43,7 +41,7 @@
       <change beforePath="$PROJECT_DIR$/src/cards/hero/KingMudface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/hero/KingMudface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/hero/LordRoyce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/hero/LordRoyce.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minion/Disciple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Disciple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Minion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minion/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Minion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minion/Miraj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Miraj.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minion/SpecialAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/SpecialAbility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" afterDir="false" />
@@ -79,6 +77,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2HG0TsU368SymEouD3jg8P2mbwq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -99,6 +100,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -119,7 +121,8 @@
       <workItem from="1668112057563" duration="4466000" />
       <workItem from="1668117023388" duration="4231000" />
       <workItem from="1668158717697" duration="11309000" />
-      <workItem from="1668273230372" duration="42337000" />
+      <workItem from="1668273230372" duration="42405000" />
+      <workItem from="1668413684084" duration="42502000" />
     </task>
     <task id="LOCAL-00001" summary="add cards class">
       <created>1668169639405</created>
@@ -142,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668334413222</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update cards and players actions">
+      <created>1668384553737</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668384553737</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +174,8 @@
     <MESSAGE value="add cards class" />
     <MESSAGE value="update cards" />
     <MESSAGE value="add actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="add actions" />
+    <MESSAGE value="update cards and players actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="update cards and players actions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,6 +1,6 @@
 package table;
 
-import cards.minion.Minion;
+import cards.Minion;
 import fileio.Coordinates;
 
 import java.util.ArrayList;
@@ -31,30 +31,39 @@ public class Table {
         getTable().get(rowIndex).add(card);
     }
 
-    // lista cu coordonatele cartilor tank
-    public static ArrayList<Coordinates> enemyTankCards(int playerIndex) {
-        ArrayList<Coordinates> enemyTankCards = new ArrayList<Coordinates>();
-
+    public static boolean enemyHasTankCards(int playerIndex) {
         if (playerIndex == 2) {
             for (int i = 0; i < getTable().get(2).size(); ++i)
-                if (getTable().get(2).get(i).isTank())
-                    enemyTankCards.add(new Coordinates(2, i));
-
-            for (int i = 0; i < getTable().get(3).size(); ++i)
-                if (getTable().get(3).get(i).isTank())
-                    enemyTankCards.add(new Coordinates(3, i));
+                if (getTable().get(2).get(i).isTank()) {
+                    return true;
+                }
         }
 
         if (playerIndex == 1) {
-            for (int i = 0; i < getTable().get(0).size(); ++i)
-                if (getTable().get(0).get(i).isTank())
-                    enemyTankCards.add(new Coordinates(0, i));
-
             for (int i = 0; i < getTable().get(1).size(); ++i)
                 if (getTable().get(1).get(i).isTank())
-                    enemyTankCards.add(new Coordinates(1, i));
+                    return true;
         }
 
-        return enemyTankCards;
+        return false;
+    }
+
+    public static ArrayList<Minion> getFrozenCards() {
+        ArrayList<Minion> frozenCards = new ArrayList<>();
+
+        for (ArrayList<Minion> cards : getTable()) {
+            for (Minion card : cards) {
+                if (card.isFrozen())
+                    frozenCards.add(card);
+            }
+        }
+
+        return frozenCards;
+    }
+
+    public static void clearTable() {
+        for (ArrayList<Minion> row : Table.getTable()) {
+            row.clear();
+        }
     }
 }

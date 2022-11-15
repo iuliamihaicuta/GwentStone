@@ -24,7 +24,7 @@ public class Environment extends Card {
     public Environment(Card card) {super(card);}
 
     public boolean isEnemyRow(int indexPlayer, int indexRow) {
-        return indexPlayer == 1 && indexRow < 3 || indexPlayer == 2 && indexRow > 2;
+        return indexPlayer == 1 && indexRow < 2 || indexPlayer == 2 && indexRow > 1;
     }
 
     public String canUseAbility(Player player, int rowIndex) {
@@ -32,11 +32,13 @@ public class Environment extends Card {
 
         if (getMana() > player.getMana())
             error = "Not enough mana to use environment card.";
-        else if (!isEnemyRow(player.getId(), rowIndex))
-            error = "Chosen row does not belong to the enemy.";
         else if (getName().equals("Heart Hound") && getTable().get(3 - rowIndex).size() == 5)
             error = "Cannot steal enemy card since the player's row is full.";
+        else if (!isEnemyRow(player.getId(), rowIndex))
+            error = "Chosen row does not belong to the enemy.";
 
         return error;
     }
+
+    public void ability(Player player, int row) {};
 }
