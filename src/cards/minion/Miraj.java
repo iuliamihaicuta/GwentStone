@@ -25,6 +25,7 @@ public final class Miraj extends Minion implements SpecialAbility {
     @Override
     public void ability(final int indexPlayer, final Coordinates cardAttacked) {
         Minion card = getTable().get(cardAttacked.getX()).get(cardAttacked.getY());
+
         int temp = this.getHealth();
         this.setHealth(card.getHealth());
         card.setHealth(temp);

@@ -7,14 +7,14 @@ import player.Player;
 
 import java.util.List;
 
-import static constants.Constants.MAX_LENGTH_OF_ROW;
-import static constants.Constants.NUMBER_OF_ROWS;
+import static constants.Constants.*;
 import static table.Table.getTable;
 
 /**
  * The type Environment.
  */
 public class Environment extends Card {
+    // for output
     @JsonIgnore
     private int attackDamage;
     @JsonIgnore
@@ -52,7 +52,8 @@ public class Environment extends Card {
      * @return the boolean
      */
     public boolean isEnemyRow(final int indexPlayer, final int indexRow) {
-        return indexPlayer == 1 && indexRow < 2 || indexPlayer == 2 && indexRow > 1;
+        return indexPlayer == 1 && indexRow < PLAYER1_FIRST_ROW
+                || indexPlayer == 2 && indexRow > PLAYER2_FIRST_ROW;
     }
 
     /**
@@ -63,18 +64,16 @@ public class Environment extends Card {
      * @return the string
      */
     public String canUseAbility(final Player player, final int rowIndex) {
-        String error = null;
-
         if (getMana() > player.getMana()) {
-            error = "Not enough mana to use environment card.";
+            return "Not enough mana to use environment card.";
         } else if (getName().equals("Heart Hound")
                 && getTable().get(NUMBER_OF_ROWS - rowIndex - 1).size() == MAX_LENGTH_OF_ROW) {
-            error = "Cannot steal enemy card since the player's row is full.";
+            return "Cannot steal enemy card since the player's row is full.";
         } else if (!isEnemyRow(player.getId(), rowIndex)) {
-            error = "Chosen row does not belong to the enemy.";
+            return "Chosen row does not belong to the enemy.";
         }
 
-        return error;
+        return null;
     }
 
     /**

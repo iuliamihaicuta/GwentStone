@@ -25,6 +25,7 @@ public final class TheCursedOne extends Minion implements SpecialAbility {
     @Override
     public void ability(final int indexPlayer, final Coordinates cardAttacked) {
         Minion card = getTable().get(cardAttacked.getX()).get(cardAttacked.getY());
+
         int temp = card.getHealth();
         card.setHealth(card.getAttackDamage());
         card.setAttackDamage(temp);

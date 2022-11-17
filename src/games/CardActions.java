@@ -13,7 +13,7 @@ import player.Player;
 import java.util.ArrayList;
 
 import static cards.environment.Environment.environmentCardList;
-import static constants.Constants.MAX_LENGTH_OF_ROW;
+import static constants.Constants.*;
 import static table.Table.getTable;
 import static table.Table.removeFromRow;
 import static table.Table.getFrozenCards;
@@ -34,7 +34,7 @@ public final class CardActions {
      */
     public static void placeCard(final Player player, final int handIndex,
                                  final ArrayNode output) {
-        String error = null;
+        String error;
 
         Card card = player.getHand().getCards().get(handIndex);
 
@@ -58,17 +58,18 @@ public final class CardActions {
 
                 player.getHand().removeFromHand(handIndex);
                 player.setMana(player.getMana() - minion.getMana());
+
+                return;
             }
         }
 
-        if (error != null) {
-            ObjectNode node = JsonNodeFactory.instance.objectNode();
-            node.put("command", "placeCard");
-            node.put("error", error);
-            node.put("handIdx", handIndex);
+        ObjectNode node = JsonNodeFactory.instance.objectNode();
 
-            output.addPOJO(node);
-        }
+        node.put("command", "placeCard");
+        node.put("error", error);
+        node.put("handIdx", handIndex);
+
+        output.addPOJO(node);
     }
 
     /**
@@ -87,21 +88,23 @@ public final class CardActions {
         if (error == null) {
             Minion attackedCard = getTable().get(cardAttacked.getX()).get(cardAttacked.getY());
             attackedCard.setHealth(attackedCard.getHealth() - attackerCard.getAttackDamage());
+            getTable().get(cardAttacker.getX()).get(cardAttacker.getY()).setHasAttacked(true);
 
             if (attackedCard.getHealth() <= 0) {
                 removeFromRow(cardAttacked);
             }
 
-            getTable().get(cardAttacker.getX()).get(cardAttacker.getY()).setHasAttacked(true);
-        } else {
-            ObjectNode node = JsonNodeFactory.instance.objectNode();
-            node.put("command", "cardUsesAttack");
-            node.putPOJO("cardAttacker", cardAttacker);
-            node.putPOJO("cardAttacked", cardAttacked);
-            node.put("error", error);
-
-            output.addPOJO(node);
+            return;
         }
+
+        ObjectNode node = JsonNodeFactory.instance.objectNode();
+
+        node.put("command", "cardUsesAttack");
+        node.putPOJO("cardAttacker", cardAttacker);
+        node.putPOJO("cardAttacked", cardAttacked);
+        node.put("error", error);
+
+        output.addPOJO(node);
     }
 
     /**
@@ -120,15 +123,18 @@ public final class CardActions {
         if (error == null) {
             ((SpecialAbility) attackerCard).ability(player.getId(), cardAttacked);
             getTable().get(cardAttacker.getX()).get(cardAttacker.getY()).setHasAttacked(true);
-        } else {
-                ObjectNode node = JsonNodeFactory.instance.objectNode();
-                node.put("command", "cardUsesAbility");
-                node.putPOJO("cardAttacker", cardAttacker);
-                node.putPOJO("cardAttacked", cardAttacked);
-                node.put("error", error);
 
-                output.addPOJO(node);
+            return;
         }
+
+        ObjectNode node = JsonNodeFactory.instance.objectNode();
+
+        node.put("command", "cardUsesAbility");
+        node.putPOJO("cardAttacker", cardAttacker);
+        node.putPOJO("cardAttacked", cardAttacked);
+        node.put("error", error);
+
+        output.addPOJO(node);
     }
 
     /**
@@ -146,20 +152,24 @@ public final class CardActions {
                 new Minion(getTable().get(cardAttacker.getX()).get(cardAttacker.getY()));
         String error = attackerCard.canAttackHero(player.getId());
 
-        boolean gameEnded = false;
-
         if (error == null) {
             enemy.getHero().setHealth(enemy.getHero().getHealth() - attackerCard.getAttackDamage());
             getTable().get(cardAttacker.getX()).get(cardAttacker.getY()).setHasAttacked(true);
 
             if (enemy.getHero().getHealth() <= 0) {
+                String gameEndedOutput;
                 if (player.getId() == 1) {
-                    error = "Player one killed the enemy hero.";
+                    gameEndedOutput = "Player one killed the enemy hero.";
                 } else {
-                    error = "Player two killed the enemy hero.";
+                    gameEndedOutput = "Player two killed the enemy hero.";
                 }
 
-                gameEnded = true;
+                ObjectNode node = JsonNodeFactory.instance.objectNode();
+
+                node.put("gameEnded", gameEndedOutput);
+                output.addPOJO(node);
+
+                return true;
             }
         } else {
             ObjectNode node = JsonNodeFactory.instance.objectNode();
@@ -168,15 +178,6 @@ public final class CardActions {
             node.put("error", error);
 
             output.addPOJO(node);
-        }
-
-        if (gameEnded) {
-            ObjectNode node = JsonNodeFactory.instance.objectNode();
-            node.put("gameEnded", error);
-
-            output.addPOJO(node);
-
-            return true;
         }
 
         return false;
@@ -196,12 +197,12 @@ public final class CardActions {
         if (error == null) {
             if (player.getHero().getName().equals("Lord Royce")
                     || player.getHero().getName().equals("Empress Thorina")) {
-                if (player.getId() == 1 && affectedRow > 1
-                        || player.getId() == 2 && affectedRow < 2) {
+                if (player.getId() == 1 && affectedRow > PLAYER2_FIRST_ROW
+                        || player.getId() == 2 && affectedRow < PLAYER1_FIRST_ROW) {
                     error = "Selected row does not belong to the enemy.";
                 }
-            } else if (player.getId() == 1 && affectedRow < 2
-                    || player.getId() == 2 && affectedRow > 1) {
+            } else if (player.getId() == 1 && affectedRow < PLAYER1_FIRST_ROW
+                    || player.getId() == 2 && affectedRow > PLAYER2_FIRST_ROW) {
                 error = "Selected row does not belong to the current player.";
             }
         }
@@ -209,17 +210,18 @@ public final class CardActions {
         if (error == null) {
             player.getHero().ability(affectedRow);
             player.setMana(player.getMana() - player.getHero().getMana());
-
             player.getHero().setHasAttacked(true);
-        } else {
-            ObjectNode node = JsonNodeFactory.instance.objectNode();
 
-            node.put("command", "useHeroAbility");
-            node.put("affectedRow", affectedRow);
-            node.put("error", error);
-
-            output.addPOJO(node);
+            return;
         }
+
+        ObjectNode node = JsonNodeFactory.instance.objectNode();
+
+        node.put("command", "useHeroAbility");
+        node.put("affectedRow", affectedRow);
+        node.put("error", error);
+
+        output.addPOJO(node);
     }
 
     /**
@@ -244,18 +246,19 @@ public final class CardActions {
                 card.ability(player, affectedRow);
                 player.setMana(player.getMana() - card.getMana());
                 player.getHand().getCards().remove(handIndex);
+
+                return;
             }
         }
 
-        if (error != null) {
-            ObjectNode node = JsonNodeFactory.instance.objectNode();
-            node.put("command", "useEnvironmentCard");
-            node.put("handIdx", handIndex);
-            node.put("affectedRow", affectedRow);
-            node.put("error", error);
+        ObjectNode node = JsonNodeFactory.instance.objectNode();
 
-            output.addPOJO(node);
-        }
+        node.put("command", "useEnvironmentCard");
+        node.put("handIdx", handIndex);
+        node.put("affectedRow", affectedRow);
+        node.put("error", error);
+
+        output.addPOJO(node);
     }
 
     /**
@@ -266,6 +269,7 @@ public final class CardActions {
      */
     public static void getCardsInHand(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getCardsInHand");
         node.put("playerIdx", player.getId());
 
@@ -277,7 +281,6 @@ public final class CardActions {
                 temp.add(temp.size(), new Minion(card));
             }
         }
-
         node.putPOJO("output", temp);
 
         output.addPOJO(node);
@@ -290,10 +293,10 @@ public final class CardActions {
      */
     public static void getCardsOnTable(final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getCardsOnTable");
 
         ArrayList<ArrayList<Minion>> temp = new ArrayList<>();
-
         for (int i = 0; i < getTable().size(); ++i) {
             temp.add(new ArrayList<>());
             for (Minion card : getTable().get(i)) {
@@ -319,6 +322,7 @@ public final class CardActions {
         }
 
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getCardAtPosition");
         node.put("x", x);
         node.put("y", y);
@@ -340,6 +344,7 @@ public final class CardActions {
      */
     public static void getEnvironmentCardsInHand(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getEnvironmentCardsInHand");
         node.put("playerIdx", player.getId());
         node.putPOJO("output", player.getHand().getEnvironmentCards());
@@ -354,6 +359,7 @@ public final class CardActions {
      */
     public static void getFrozenCardsOnTable(final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getFrozenCardsOnTable");
         node.putPOJO("output", getFrozenCards());
 

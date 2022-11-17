@@ -4,6 +4,7 @@ import cards.hero.EmpressThorina;
 import cards.hero.GeneralKocioraw;
 import cards.hero.LordRoyce;
 import cards.hero.KingMudface;
+import cards.minion.Minion;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import fileio.CardInput;
 import fileio.GameInput;
@@ -32,8 +33,8 @@ import static games.PlayerActions.getPlayerHero;
 import static games.PlayerActions.getPlayerMana;
 import static games.PlayerActions.getTotalGamesPlayed;
 import static games.PlayerActions.getPlayerWins;
-import static games.PlayerActions.endPlayerTurn;
 import static table.Table.getTable;
+import static table.Table.createTable;
 
 import static constants.Constants.PLAYER1_FIRST_ROW;
 import static constants.Constants.PLAYER1_SECOND_ROW;
@@ -44,7 +45,6 @@ import static constants.Constants.PLAYER2_SECOND_ROW;
  * The type Start.
  */
 public class Start {
-    private final Table table = new Table();
     private Player player1;
     private Player player2;
     private int actionIndex;
@@ -56,6 +56,7 @@ public class Start {
      * @param output the output
      */
     public void start(final Input input, final ArrayNode output) {
+        createTable();
         Player.setGamesPlayed(0);
         player1 = new Player(input.getPlayerOneDecks(),
                 getTable().get(PLAYER1_FIRST_ROW), getTable().get(PLAYER1_SECOND_ROW), 1);
@@ -106,6 +107,7 @@ public class Start {
         player.setMana(0);
         player.getHand().getCards().clear();
     }
+
     private Player getEnemy(final int playerIndex) {
         if (playerIndex == 1) {
             return player2;
@@ -125,6 +127,17 @@ public class Start {
     private void endGame(final Player winner) {
         winner.setTotalGamesWon(winner.getTotalGamesWon() + 1);
         Player.setGamesPlayed(Player.getGamesPlayed() + 1);
+    }
+
+    private void endPlayerTurn(final Player player) {
+        for (ArrayList<Minion> row : player.getRows()) {
+            for (Minion minion : row) {
+                minion.setFrozen(false);
+                minion.setHasAttacked(false);
+            }
+        }
+
+        player.getHero().setHasAttacked(false);
     }
 
     private void createHero(final Player player, final CardInput card) {

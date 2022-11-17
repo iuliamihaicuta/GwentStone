@@ -5,18 +5,21 @@ import fileio.Coordinates;
 
 import java.util.ArrayList;
 
-import static constants.Constants.NUMBER_OF_ROWS;
+import static constants.Constants.*;
 
 /**
  * The type Table.
  */
-public class Table {
+public final class Table {
     private static ArrayList<ArrayList<Minion>> table;
+
+    private Table() {
+    }
 
     /**
      * prepares the game board for use
      */
-    public Table() {
+    public static void createTable() {
         table = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_ROWS; i++) {
             table.add(new ArrayList<>());
@@ -58,19 +61,16 @@ public class Table {
      * @return the boolean
      */
     public static boolean enemyHasTankCards(final int playerIndex) {
+        int row;
         if (playerIndex == 2) {
-            for (int i = 0; i < getTable().get(2).size(); ++i) {
-                if (getTable().get(2).get(i).isTank()) {
-                    return true;
-                }
-            }
+            row = PLAYER1_FIRST_ROW;
+        } else {
+            row = PLAYER2_FIRST_ROW;
         }
 
-        if (playerIndex == 1) {
-            for (int i = 0; i < getTable().get(1).size(); ++i) {
-                if (getTable().get(1).get(i).isTank()) {
-                    return true;
-                }
+        for (int i = 0; i < getTable().get(row).size(); ++i) {
+            if (getTable().get(row).get(i).isTank()) {
+                return true;
             }
         }
 

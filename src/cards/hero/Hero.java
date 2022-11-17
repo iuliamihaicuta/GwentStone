@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CardInput;
 import player.Player;
 
-import static constants.Constants.PLAYER1_SECOND_ROW;
 import static constants.Constants.HERO_HEALTH;
 
 /**
  * The type Hero.
  */
 public class Hero extends Card {
+    // for output
     @JsonIgnore
     private boolean hasAttacked = false;
     @JsonIgnore
@@ -43,15 +43,13 @@ public class Hero extends Card {
      * @return the string
      */
     public String canAttack(final Player player) {
-        String error = null;
-
         if (player.getMana() < getMana()) {
-            error = "Not enough mana to use hero's ability.";
+            return "Not enough mana to use hero's ability.";
         } else if (hasAttacked) {
-            error = "Hero has already attacked this turn.";
+            return "Hero has already attacked this turn.";
         }
 
-        return error;
+        return null;
     }
 
     /**

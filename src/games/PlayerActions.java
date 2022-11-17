@@ -1,13 +1,10 @@
 package games;
 
-import cards.minion.Minion;
 import cards.hero.Hero;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import player.Player;
-
-import java.util.ArrayList;
 
 /**
  * The type Player actions.
@@ -24,6 +21,7 @@ public final class PlayerActions {
      */
     public static void getPlayerDeck(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getPlayerDeck");
         node.put("playerIdx", player.getId());
         node.putPOJO("output", player.getUsedDeck());
@@ -38,6 +36,7 @@ public final class PlayerActions {
      */
     public static void getTotalGamesPlayed(final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getTotalGamesPlayed");
         node.put("output", Player.getGamesPlayed());
 
@@ -52,31 +51,15 @@ public final class PlayerActions {
      */
     public static void getPlayerWins(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         if (player.getId() == 1) {
             node.put("command", "getPlayerOneWins");
         } else {
             node.put("command", "getPlayerTwoWins");
         }
-
         node.put("output", player.getTotalGamesWon());
 
         output.addPOJO(node);
-    }
-
-    /**
-     * prepare player for new turn
-     *
-     * @param player the player
-     */
-    public static void endPlayerTurn(final Player player) {
-        for (ArrayList<Minion> row : player.getRows()) {
-            for (Minion minion : row) {
-                minion.setFrozen(false);
-                minion.setHasAttacked(false);
-            }
-        }
-
-        player.getHero().setHasAttacked(false);
     }
 
     /**
@@ -87,13 +70,12 @@ public final class PlayerActions {
      */
     public static void getPlayerTurn(final int turn, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
-        node.put("command", "getPlayerTurn");
 
+        node.put("command", "getPlayerTurn");
         int playerTurn = turn % 2;
         if (playerTurn == 0) {
             playerTurn = 2;
         }
-
         node.put("output", playerTurn);
 
         output.addPOJO(node);
@@ -107,9 +89,9 @@ public final class PlayerActions {
      */
     public static void getPlayerHero(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getPlayerHero");
         node.put("playerIdx", player.getId());
-
         node.putPOJO("output", new Hero(player.getHero()));
 
         output.addPOJO(node);
@@ -123,9 +105,9 @@ public final class PlayerActions {
      */
     public static void getPlayerMana(final Player player, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
+
         node.put("command", "getPlayerMana");
         node.put("playerIdx", player.getId());
-
         int tmp = player.getMana();
         node.put("output", tmp);
 

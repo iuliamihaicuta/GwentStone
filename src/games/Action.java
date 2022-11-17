@@ -7,7 +7,7 @@ import fileio.Coordinates;
 /**
  * The type Action.
  */
-public class Action {
+public final class Action {
     private final String command;
     private final int handIdx;
     private final Coordinates cardAttacker;

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 /**
  * The type Game.
  */
-public class Game {
-    private StartGame startGame;
-    private ArrayList<Action> actions;
+public final class Game {
+    private final StartGame startGame;
+    private final ArrayList<Action> actions;
 
     /**
      * Instantiates a new Game.
@@ -36,15 +36,6 @@ public class Game {
     }
 
     /**
-     * set the parameters of the new game
-     *
-     * @param startGame the start game
-     */
-    public void setStartGame(final StartGame startGame) {
-        this.startGame = startGame;
-    }
-
-    /**
      * get the action list of the new game
      *
      * @return the actions
@@ -52,14 +43,4 @@ public class Game {
     public ArrayList<Action> getActions() {
         return actions;
     }
-
-    /**
-     * set the action list of the new game
-     *
-     * @param actions the actions
-     */
-    public void setActions(final ArrayList<Action> actions) {
-        this.actions = actions;
-    }
-
 }

@@ -1,6 +1,7 @@
 Starting audit...
-[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\cards\environment\Environment.java:26:38: Name 'environmentCardList' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
-[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\cards\hero\Hero.java:8:15: Unused import - constants.Constants.PLAYER1_SECOND_ROW. [UnusedImports]
-[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\table\Table.java:13:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\cards\environment\Environment.java:10:34: Using the '.*' form of import should be avoided - constants.Constants.*. [AvoidStarImport]
+[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\cards\environment\Environment.java:25:38: Name 'environmentCardList' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
+[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\games\CardActions.java:16:34: Using the '.*' form of import should be avoided - constants.Constants.*. [AvoidStarImport]
+[ERROR] C:\Users\Iulia\IdeaProjects\GwentStoneoldv3\.\src\table\Table.java:8:34: Using the '.*' form of import should be avoided - constants.Constants.*. [AvoidStarImport]
 Audit done.
-Checkstyle ends with 3 errors.
+Checkstyle ends with 4 errors.

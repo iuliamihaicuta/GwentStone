@@ -115,27 +115,4 @@ public class Card {
         return name;
     }
 
-    /**
-     * override toString() method
-     */
-    @Override
-    public String toString() {
-        return "CardInput{"
-                +  "mana="
-                + mana
-                +  ", attackDamage="
-                + attackDamage
-                + ", health="
-                + health
-                +  ", description='"
-                + description
-                + '\''
-                + ", colors="
-                + colors
-                + ", name='"
-                +  ""
-                + name
-                + '\''
-                + '}';
-    }
 }

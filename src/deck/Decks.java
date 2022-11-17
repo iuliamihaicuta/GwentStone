@@ -59,18 +59,4 @@ public class Decks {
         return decks;
     }
 
-    /**
-     * override toString() method
-     */
-    @Override
-    public String toString() {
-        return "InfoInput{"
-                + "nr_cards_in_deck="
-                + nrCardsInDeck
-                +  ", nr_decks="
-                + nrDecks
-                + ", decks="
-                + decks
-                + '}';
-    }
 }
