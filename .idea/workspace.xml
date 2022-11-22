@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="checkstyle">
+    <list default="true" id="0e545a6a-0f4f-4438-b1ed-53828301d319" name="Changes" comment="final commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environment/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environment/Environment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/hero/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/hero/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Minion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/Miraj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/Miraj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minion/TheCursedOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/deck/Decks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/deck/Decks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/games/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/games/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/games/CardActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/games/CardActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/games/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/games/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/games/PlayerActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/games/PlayerActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/games/StartGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/games/StartGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/start/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/start/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,22 +45,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Iulia/IdeaProjects/laborator&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Iulia/IdeaProjects/laborator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -96,7 +84,8 @@
       <workItem from="1668510620340" duration="12950000" />
       <workItem from="1668537047590" duration="6280000" />
       <workItem from="1668601968742" duration="77000" />
-      <workItem from="1668715246919" duration="4852000" />
+      <workItem from="1668715246919" duration="5024000" />
+      <workItem from="1668949492672" duration="11779000" />
     </task>
     <task id="LOCAL-00001" summary="add cards class">
       <created>1668169639405</created>
@@ -147,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668531253853</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="final commit">
+      <created>1668720797786</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668720797786</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,7 +168,9 @@
     <MESSAGE value="update cards and players actions" />
     <MESSAGE value="test passed" />
     <MESSAGE value="checkstyle" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkstyle" />
+    <MESSAGE value="final commir" />
+    <MESSAGE value="final commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="final commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
